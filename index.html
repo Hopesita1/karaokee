@@ -99,6 +99,21 @@
   .sub-btn:disabled{background:#1c2716;color:#3a4a30;cursor:not-allowed;}
   .timer-box{background:#111a0c;border:1px solid #c4501a;color:#e8804a;border-radius:10px;padding:8px 14px;font-size:13px;text-align:center;margin-bottom:1rem;font-weight:700;}
   .ok-box{background:#0e2210;border:1px solid #3B6D11;border-radius:12px;padding:1.1rem;text-align:center;color:#97C459;font-size:14px;display:none;margin-bottom:1rem;font-weight:700;line-height:1.6;}
+
+  /* MENSAJE DUPLICADO ANIMADO */
+  .dup-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:999;align-items:center;justify-content:center;padding:1.5rem;}
+  .dup-overlay.show{display:flex;animation:dupFadeIn .25s ease;}
+  .dup-card{background:#1a0c08;border:2px solid #c4501a;border-radius:18px;padding:1.75rem 1.5rem;max-width:340px;width:100%;text-align:center;animation:dupSlideUp .3s ease;}
+  .dup-icon{font-size:48px;margin-bottom:.75rem;animation:dupShake .5s ease .1s;}
+  .dup-title{font-family:'Cinzel',serif;font-size:16px;letter-spacing:2px;color:#c4501a;margin-bottom:.5rem;}
+  .dup-body{font-size:13px;color:#8a6050;line-height:1.7;margin-bottom:1.25rem;}
+  .dup-songs{display:flex;flex-direction:column;gap:4px;margin-bottom:1.25rem;}
+  .dup-song-tag{background:#2a1208;border:1px solid #c4501a;border-radius:8px;padding:6px 12px;font-size:12px;color:#e8804a;font-weight:700;}
+  .dup-btn{width:100%;background:#c4501a;color:#fff;border:none;padding:12px;border-radius:10px;font-family:'Cinzel',serif;font-size:14px;letter-spacing:2px;cursor:pointer;transition:background .15s;}
+  .dup-btn:hover{background:#d4601a;}
+  @keyframes dupFadeIn{from{opacity:0;}to{opacity:1;}}
+  @keyframes dupSlideUp{from{transform:translateY(30px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+  @keyframes dupShake{0%,100%{transform:rotate(0);}20%{transform:rotate(-12deg);}40%{transform:rotate(12deg);}60%{transform:rotate(-8deg);}80%{transform:rotate(8deg);}}
   .divider{height:1px;background:#1e2e14;margin:1rem 0;}
   .back-btn{background:none;border:1px solid #2e3e26;color:#5a6650;padding:6px 14px;border-radius:8px;cursor:pointer;font-family:'Nunito',sans-serif;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;transition:all .15s;}
   .back-btn:hover{color:#8aaa80;border-color:#3a5030;}
@@ -274,6 +289,17 @@
   </div>
 </div>
 
+<!-- OVERLAY DUPLICADO -->
+<div class="dup-overlay" id="dupOverlay">
+  <div class="dup-card">
+    <div class="dup-icon">🚫</div>
+    <div class="dup-title">Ya fue pedida esta noche</div>
+    <div class="dup-body">Estas canciones ya estan en la lista.<br>Elige algo diferente para animar la noche.</div>
+    <div class="dup-songs" id="dupSongsList"></div>
+    <button class="dup-btn" onclick="closeDupOverlay()">Entendido, cambio mi seleccion</button>
+  </div>
+</div>
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
 import { getDatabase, ref, get, set, push, update, onValue }
@@ -302,6 +328,8 @@ let songs   = [];
 async function getQueue(){ const s = await get(ref(db,'queue')); return s.exists() ? Object.entries(s.val()).map(([k,v])=>({_key:k,...v})) : []; }
 async function getCool(){  const s = await get(ref(db,'cool'));  return s.exists() ? s.val() : {}; }
 async function getHist(){  const s = await get(ref(db,'hist'));  return s.exists() ? Object.values(s.val()) : []; }
+// Devuelve array de {title, artist} — soporta formato viejo (string) y nuevo (objeto)
+function parseHist(raw){ return raw.map(h => typeof h === 'string' ? {title:h, artist:''} : h); }
 
 /* ── UI ── */
 function show(id){
@@ -422,6 +450,19 @@ function removeSong(idx){
 }
 window.removeSong = removeSong;
 
+/* ── Overlay duplicado ── */
+function showDupOverlay(dups){
+  const list = document.getElementById('dupSongsList');
+  list.innerHTML = dups.map(d =>
+    `<div class="dup-song-tag">${d.title}${d.artist ? ' — ' + d.artist : ''}</div>`
+  ).join('');
+  document.getElementById('dupOverlay').classList.add('show');
+}
+function closeDupOverlay(){
+  document.getElementById('dupOverlay').classList.remove('show');
+}
+window.closeDupOverlay = closeDupOverlay;
+
 /* ── Enviar peticion ── */
 async function submitReq(){
   const team = document.getElementById('fTeam').value.trim();
@@ -437,10 +478,22 @@ async function submitReq(){
   if(!team)         { alert('Por favor escribe el nombre de tu equipo.'); return; }
   if(!valid.length) { alert('Agrega al menos una cancion.'); return; }
 
-  const hist = await getHist();
-  const dups = valid.filter(s => hist.some(h => h.toLowerCase() === s.title.trim().toLowerCase()));
+  // Duplicado = mismo titulo Y mismo artista (ignorando mayusculas/espacios)
+  const rawHist = await getHist();
+  const hist    = parseHist(rawHist);
+  const dups = valid.filter(s =>
+    hist.some(h => {
+      const sameTitle  = h.title.trim().toLowerCase()  === s.title.toLowerCase();
+      const sameArtist = h.artist.trim().toLowerCase() === s.artist.toLowerCase();
+      // Si ambos tienen artista definido, requiere que coincidan los dos
+      // Si alguno no tiene artista, solo compara titulo
+      const artistDefined = h.artist.trim() !== '' && s.artist !== '';
+      return sameTitle && (!artistDefined || sameArtist);
+    })
+  );
+
   if(dups.length){
-    alert('Estas canciones ya fueron pedidas esta noche:\n' + dups.map(d=>d.title).join('\n') + '\n\nElige otras, por favor.');
+    showDupOverlay(dups);
     return;
   }
 
@@ -449,18 +502,20 @@ async function submitReq(){
   btn.textContent = 'Enviando...';
 
   try {
-    // Agregar a la cola
     await push(ref(db,'queue'), {
       mesa: curMesa, team, songs: valid,
       status: 'waiting', ts: Date.now()
     });
 
-    // Historial: guardar cada titulo
+    // Historial: guardar {title, artist} para comparacion futura
     const histUpdates = {};
-    valid.forEach(s => { histUpdates[`hist/${Date.now()}_${Math.random().toString(36).slice(2)}`] = s.title.trim(); });
+    valid.forEach(s => {
+      histUpdates[`hist/${Date.now()}_${Math.random().toString(36).slice(2)}`] = {
+        title: s.title, artist: s.artist
+      };
+    });
     await update(ref(db), histUpdates);
 
-    // Cooldown
     await update(ref(db,'cool'), { [curMesa]: Date.now() + COOL });
 
     document.getElementById('okBox').style.display = 'block';
