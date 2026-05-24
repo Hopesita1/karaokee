@@ -401,11 +401,11 @@ function addSong(){
     </div>
     <div class="fld" style="margin-bottom:8px;">
       <label>Nombre de la cancion</label>
-      <input type="text" placeholder="Ej: Amor Eterno" oninput="songs[${idx}].title=this.value" maxlength="60">
+      <input type="text" id="songTitle${idx}" placeholder="Ej: Amor Eterno" maxlength="60">
     </div>
     <div class="fld" style="margin-bottom:0;">
       <label>Artista (si es diferente)</label>
-      <input type="text" placeholder="Ej: Rocio Durcal" oninput="songs[${idx}].artist=this.value" maxlength="40">
+      <input type="text" id="songArtist${idx}" placeholder="Ej: Rocio Durcal" maxlength="40">
     </div>`;
   c.appendChild(d);
   if(songs.length >= 3) document.getElementById('addBtn').style.display = 'none';
@@ -416,15 +416,24 @@ function removeSong(idx){
   songs.splice(idx, 1);
   document.getElementById('songsContainer').innerHTML = '';
   document.getElementById('addBtn').style.display = 'block';
-  const tmp = [...songs]; songs = [];
-  tmp.forEach((s, i) => { addSong(); songs[i] = s; });
+  const count = songs.length;
+  songs = [];
+  for(let i = 0; i < count; i++) addSong();
 }
 window.removeSong = removeSong;
 
 /* ── Enviar peticion ── */
 async function submitReq(){
-  const team  = document.getElementById('fTeam').value.trim();
-  const valid = songs.filter(s => s.title.trim());
+  const team = document.getElementById('fTeam').value.trim();
+
+  // Leer canciones directo del DOM (evita problema de scope con ES modules)
+  const valid = [];
+  for(let i = 0; i < songs.length; i++){
+    const title  = (document.getElementById(`songTitle${i}`)?.value  || '').trim();
+    const artist = (document.getElementById(`songArtist${i}`)?.value || '').trim();
+    if(title) valid.push({ title, artist });
+  }
+
   if(!team)         { alert('Por favor escribe el nombre de tu equipo.'); return; }
   if(!valid.length) { alert('Agrega al menos una cancion.'); return; }
 
