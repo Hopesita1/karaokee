@@ -22,8 +22,9 @@
   @keyframes hdrRays{0%,100%{opacity:.6;transform:scale(1);}50%{opacity:1;transform:scale(1.08);}}
   @keyframes hdrBlink{0%,90%,100%{transform:scaleY(1);}95%{transform:scaleY(0.1);}}
   @keyframes hdrPulse{0%,100%{r:5;}50%{r:7;}}
+
   /* HEADER */
-  .pres-hdr{background:#0e1a08;border-bottom:2px solid #d4a843;padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+  .pres-hdr{background:rgba(14,26,8,.92);backdrop-filter:blur(8px);border-bottom:2px solid #d4a843;padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
   .hdr-left{display:flex;align-items:center;gap:12px;}
   .hdr-titles{}
   .pres-title{font-family:'Cinzel',serif;font-size:16px;letter-spacing:3px;color:#d4a843;line-height:1;}
@@ -35,13 +36,13 @@
   .badge-orange{background:#2a1208;border:1px solid #c4501a;color:#e8804a;}
 
   /* STATS BAR */
-  .stats-bar{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:1rem;background:#0a1006;border-bottom:1px solid #1e2e14;}
+  .stats-bar{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:1rem;background:rgba(10,16,6,.85);backdrop-filter:blur(6px);border-bottom:1px solid #1e2e14;}
   .stat-card{background:#111a0c;border:1px solid #1e2e14;border-radius:10px;padding:.75rem;text-align:center;}
   .stat-num{font-family:'Cinzel',serif;font-size:26px;color:#d4a843;line-height:1;}
   .stat-lbl{font-size:10px;color:#4a5a40;letter-spacing:2px;text-transform:uppercase;margin-top:3px;}
 
   /* CONTROLES */
-  .controls{padding:.75rem 1rem;display:flex;gap:8px;flex-wrap:wrap;background:#0a1006;border-bottom:1px solid #1e2e14;}
+  .controls{padding:.75rem 1rem;display:flex;gap:8px;flex-wrap:wrap;background:rgba(10,16,6,.8);backdrop-filter:blur(6px);border-bottom:1px solid #1e2e14;}
   .ctrl-btn{padding:7px 13px;border-radius:8px;border:1px solid #2e3e26;background:none;color:#5a6650;cursor:pointer;font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;transition:all .15s;}
   .ctrl-btn:hover{border-color:#4a7c3f;color:#97C459;}
   .ctrl-btn.danger{border-color:#2a1208;color:#3a2010;}
@@ -50,21 +51,20 @@
   .search-wrap input{width:100%;background:#111a0c;border:1px solid #1e2e14;color:#e8e0d0;padding:7px 12px;border-radius:8px;font-family:'Nunito',sans-serif;font-size:13px;outline:none;transition:border-color .15s;}
   .search-wrap input:focus{border-color:#4a7c3f;}
   .search-wrap input::placeholder{color:#3a4a30;}
-
+</style>
+</head>
+<style>
   /* COLA */
   .q-container{padding:1rem;max-width:700px;margin:0 auto;}
   .section-title{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#4a5a40;margin-bottom:10px;font-weight:700;padding-left:4px;}
-
   .q-item{background:#111a0c;border:1px solid #1e2e14;border-radius:14px;padding:1rem;margin-bottom:10px;display:flex;gap:10px;align-items:flex-start;transition:all .2s;}
   .q-item.playing{border-color:#d4a843;background:#16180a;box-shadow:0 0 0 1px #d4a843;}
   .q-item.done{opacity:.35;filter:grayscale(.4);}
-
   .q-order{display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0;}
   .q-pos{font-family:'Cinzel',serif;font-size:11px;color:#4a5a40;letter-spacing:1px;}
   .q-mesa-badge{background:#4a7c3f;color:#d4edcc;border-radius:8px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:20px;font-weight:700;}
   .q-mesa-badge.playing-b{background:#d4a843;color:#0d1208;}
   .q-mesa-badge.done-b{background:#1c2716;color:#2e3e26;}
-
   .q-info{flex:1;min-width:0;}
   .q-top{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:4px;}
   .q-team{font-weight:700;font-size:15px;}
@@ -72,11 +72,9 @@
   .pill-mesa{background:#243318;color:#97C459;}
   .pill-playing{background:#d4a843;color:#0d1208;}
   .pill-wait{background:#1a2010;color:#5a6650;border:1px solid #2e3e26;}
-  .q-artist{font-size:12px;color:#5a6650;margin-bottom:6px;}
   .q-songs{display:flex;flex-wrap:wrap;gap:4px;}
   .q-song-tag{background:#1a2a14;border-radius:5px;padding:3px 8px;font-size:11px;color:#7aaa68;font-weight:600;}
   .q-time{font-size:10px;color:#2e3e26;margin-top:4px;}
-
   .q-actions{display:flex;flex-direction:column;gap:5px;flex-shrink:0;}
   .qa{background:none;border:1px solid #2e3e26;color:#5a6650;border-radius:7px;padding:5px 8px;cursor:pointer;font-size:12px;font-family:'Nunito',sans-serif;font-weight:700;transition:all .15s;white-space:nowrap;text-align:center;min-width:36px;}
   .qa:hover{border-color:#5a6650;color:#e8e0d0;}
@@ -91,11 +89,11 @@
   .empty-icon{font-size:48px;margin-bottom:1rem;}
   .empty p{font-size:14px;line-height:1.8;}
 
-  /* MODAL EDITAR */
+  /* MODAL */
   .modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:999;align-items:center;justify-content:center;padding:1rem;}
   .modal-bg.open{display:flex;}
   .modal{background:#111a0c;border:1px solid #4a7c3f;border-radius:16px;padding:1.5rem;width:100%;max-width:400px;max-height:90vh;overflow-y:auto;}
-  .modal-title{font-family:'Cinzel',serif;font-size:18px;color:#d4a843;letter-spacing:2px;margin-bottom:1.25rem;}
+  .modal-title{font-family:'Cinzel',serif;font-size:18px;color:#d4a843;letter-spacing:2px;margin-bottom:12px;}
   .fld{margin-bottom:1rem;}
   .fld label{display:block;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#4a7c3f;margin-bottom:5px;font-weight:700;}
   .fld input{width:100%;background:#0d1208;border:1px solid #243318;color:#e8e0d0;padding:9px 13px;border-radius:9px;font-family:'Nunito',sans-serif;font-size:14px;outline:none;transition:border-color .15s;}
@@ -117,7 +115,6 @@
   .hist-list{display:flex;flex-wrap:wrap;gap:4px;}
   .hist-tag{background:#0d1208;border:1px solid #1e2e14;border-radius:5px;padding:2px 8px;font-size:11px;color:#3a4a30;}
 </style>
-</head>
 <body>
 <canvas id="bgPres"></canvas>
 
@@ -132,11 +129,9 @@
             <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
           </filter>
         </defs>
-        <!-- Círculo exterior giratorio -->
         <g class="hdr-eye-circle">
           <circle cx="50" cy="50" r="47" fill="none" stroke="#e8e0d0" stroke-width="2.2" opacity=".85"/>
         </g>
-        <!-- Rayos / pestañas -->
         <g class="hdr-eye-rays" filter="url(#hdrGlow)">
           <line x1="50" y1="18" x2="50" y2="10" stroke="#e8e0d0" stroke-width="2.2" stroke-linecap="round"/>
           <line x1="58" y1="19.5" x2="61" y2="12" stroke="#e8e0d0" stroke-width="1.8" stroke-linecap="round"/>
@@ -155,7 +150,6 @@
           <line x1="14" y1="50" x2="7" y2="50" stroke="#e8e0d0" stroke-width="1.8" stroke-linecap="round"/>
           <line x1="86" y1="50" x2="93" y2="50" stroke="#e8e0d0" stroke-width="1.8" stroke-linecap="round"/>
         </g>
-        <!-- Ojo con parpadeo -->
         <g class="hdr-eye-lid" filter="url(#hdrGlow)">
           <path d="M14 50 Q22 34 50 32 Q78 34 86 50 Q78 66 50 68 Q22 66 14 50 Z"
                 fill="none" stroke="#e8e0d0" stroke-width="2.4" stroke-linejoin="round"/>
@@ -179,18 +173,9 @@
 
 <!-- STATS -->
 <div class="stats-bar">
-  <div class="stat-card">
-    <div class="stat-num" id="statEspera">0</div>
-    <div class="stat-lbl">En espera</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-num" id="statCanciones">0</div>
-    <div class="stat-lbl">Canciones</div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-num" id="statMesas">0</div>
-    <div class="stat-lbl">Mesas activas</div>
-  </div>
+  <div class="stat-card"><div class="stat-num" id="statEspera">0</div><div class="stat-lbl">En espera</div></div>
+  <div class="stat-card"><div class="stat-num" id="statCanciones">0</div><div class="stat-lbl">Canciones</div></div>
+  <div class="stat-card"><div class="stat-num" id="statMesas">0</div><div class="stat-lbl">Mesas activas</div></div>
 </div>
 
 <!-- CONTROLES -->
@@ -206,8 +191,6 @@
 <div class="q-container">
   <div class="section-title" id="queueLabel">Cola de peticiones</div>
   <div id="qList"></div>
-
-  <!-- HISTORIAL -->
   <div class="hist-section" id="histSection" style="display:none;">
     <div class="hist-title">Canciones pedidas esta noche (no se repiten)</div>
     <div class="hist-list" id="histList"></div>
@@ -218,14 +201,8 @@
 <div class="modal-bg" id="modalBg">
   <div class="modal">
     <div class="modal-title">Editar peticion</div>
-    <div class="fld">
-      <label>Nombre del equipo</label>
-      <input type="text" id="editTeam" maxlength="40">
-    </div>
-    <div class="fld">
-      <label>Artista principal</label>
-      <input type="text" id="editArtist" maxlength="40">
-    </div>
+    <div class="fld"><label>Nombre del equipo</label><input type="text" id="editTeam" maxlength="40"></div>
+    <div class="fld"><label>Artista principal</label><input type="text" id="editArtist" maxlength="40"></div>
     <div id="editSongs"></div>
     <div class="modal-btns">
       <button class="mbtn cancel" onclick="closeModal()">Cancelar</button>
@@ -238,8 +215,21 @@
 <div class="toast" id="toast"></div>
 
 <script type="module">
-import { initializeApp }   from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
-import { getDatabase, ref, set, push, update, remove, onValue, get }
+// ── PIN de acceso ──
+if (localStorage.getItem('presentadora_auth') !== 'true') {
+  const pin = prompt('Introduce el PIN de acceso:');
+  if (pin === '2026_OJOSVERDES') {
+    localStorage.setItem('presentadora_auth', 'true');
+  } else {
+    alert('Acceso denegado.');
+    window.location.href = 'index.html';
+  }
+}
+
+const TOKEN_SEGURIDAD = 'OjosVerdesAdmin2026';
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+import { getDatabase, ref, set, update, remove, onValue, get }
   from "https://www.gstatic.com/firebasejs/12.13.0/firebase-database.js";
 
 const firebaseConfig = {
@@ -256,8 +246,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db  = getDatabase(app);
 
-/* ── Estado local (se sincroniza desde Firebase) ── */
-let queue       = [];   // [{_key, mesa, team, songs, status, ts}, ...]
+let queue       = [];
 let histVisible = false;
 let editingKey  = null;
 
@@ -274,7 +263,6 @@ onValue(ref(db,'queue'), snap => {
   queue = snap.exists()
     ? Object.entries(snap.val()).map(([k,v])=>({_key:k,...v}))
     : [];
-  // Ordenar por timestamp de creación
   queue.sort((a,b)=>(a.ts||0)-(b.ts||0));
   renderQueue();
 });
@@ -285,7 +273,8 @@ async function resetAll(){
   await Promise.all([
     set(ref(db,'queue'), null),
     set(ref(db,'hist'),  null),
-    set(ref(db,'cool'),  null)
+    set(ref(db,'cool'),  null),
+    set(ref(db,'auth_action'), { token: TOKEN_SEGURIDAD, ts: Date.now() })
   ]);
   toast('Noche reiniciada');
 }
@@ -304,7 +293,10 @@ async function renderHist(){
   const hist = snap.exists() ? Object.values(snap.val()) : [];
   const c = document.getElementById('histList');
   c.innerHTML = hist.length
-    ? hist.map(h=>`<span class="hist-tag">${h}</span>`).join('')
+    ? hist.map(h => {
+        const label = typeof h === 'object' ? `${h.title}${h.artist ? ' — '+h.artist : ''}` : h;
+        return `<span class="hist-tag">${label}</span>`;
+      }).join('')
     : '<span style="font-size:12px;color:#3a4a30;">Sin canciones aun</span>';
 }
 
@@ -360,8 +352,6 @@ function renderQueue(){
     const pillHtml = isPlaying
       ? '<span class="q-pill pill-playing">&#9654; En turno</span>'
       : isDone ? '' : '<span class="q-pill pill-wait">En espera</span>';
-
-    // Posición en la cola para subir/bajar
     const qIdx = queue.findIndex(x=>x._key===item._key);
 
     d.innerHTML = `
@@ -399,7 +389,6 @@ async function mv(key, dir){
   const idx = queue.findIndex(x=>x._key===key);
   const ni  = idx + dir;
   if(ni < 0 || ni >= queue.length) return;
-  // Intercambiar timestamps para reordenar
   const tsA = queue[idx].ts, tsB = queue[ni].ts;
   await Promise.all([
     update(ref(db,`queue/${queue[idx]._key}`), {ts: tsB}),
@@ -462,16 +451,14 @@ window.closeModal = closeModal;
 
 async function saveEdit(){
   if(!editingKey) return;
-  const item    = queue.find(x=>x._key===editingKey);
-  const newTeam = document.getElementById('editTeam').value.trim()   || item.team;
-  const newArt  = document.getElementById('editArtist').value.trim();
+  const item     = queue.find(x=>x._key===editingKey);
+  const newTeam  = document.getElementById('editTeam').value.trim()  || item.team;
+  const newArt   = document.getElementById('editArtist').value.trim();
   const newSongs = (item.songs||[]).map((s,i) => ({
     title:  (document.getElementById('eSong'+i)?.value.trim() || s.title),
     artist: (document.getElementById('eArt'+i)?.value.trim() || '')
   }));
-  await update(ref(db,`queue/${editingKey}`), {
-    team: newTeam, artist: newArt, songs: newSongs
-  });
+  await update(ref(db,`queue/${editingKey}`), {team: newTeam, artist: newArt, songs: newSongs});
   closeModal();
   toast('Peticion actualizada');
 }
