@@ -32,24 +32,21 @@
 
   /* DRINKS ANIMATION */
   .drinks-row{display:flex;justify-content:center;align-items:flex-end;gap:clamp(10px,3vw,28px);margin:0 0 2rem;flex-wrap:nowrap;}
-  .drink-item{display:flex;flex-direction:column;align-items:center;gap:6px;}
-  .drink-svg{width:clamp(38px,9vw,56px);height:clamp(48px,11vw,68px);overflow:visible;filter:drop-shadow(0 3px 10px rgba(0,0,0,.6));animation:drinkFloat 3s ease-in-out infinite;}
-  .drink-item:nth-child(2) .drink-svg{animation-delay:.6s;}
-  .drink-item:nth-child(3) .drink-svg{animation-delay:1.2s;}
-  .drink-item:nth-child(4) .drink-svg{animation-delay:1.8s;}
-  .drink-item:nth-child(5) .drink-svg{animation-delay:2.4s;}
-  .drink-label{font-size:clamp(7px,1.8vw,9px);letter-spacing:2px;text-transform:uppercase;color:#3a4a30;font-weight:700;}
-  .bub{animation:bubUp 2.2s ease-in infinite;opacity:0;}
-  .bub2{animation-delay:.7s;}
-  .bub3{animation-delay:1.4s;}
-  .liq{animation:liqWave 2.5s ease-in-out infinite;}
-  .drink-item:nth-child(2) .liq{animation-delay:.5s;}
-  .drink-item:nth-child(3) .liq{animation-delay:1s;}
-  .drink-item:nth-child(4) .liq{animation-delay:1.5s;}
-  .drink-item:nth-child(5) .liq{animation-delay:2s;}
-  @keyframes drinkFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-9px);}}
-  @keyframes bubUp{0%{opacity:0;transform:translateY(0);}50%{opacity:.9;}100%{opacity:0;transform:translateY(-16px);}}
-  @keyframes liqWave{0%,100%{transform:translateY(0);}50%{transform:translateY(-2px);}}
+  .drink-item{display:flex;flex-direction:column;align-items:center;gap:4px;}
+  .drink-emoji{font-size:clamp(28px,7vw,48px);line-height:1;filter:drop-shadow(0 0 8px rgba(74,124,63,0.5));animation:drinkFloat 3s ease-in-out infinite;}
+  .drink-item:nth-child(2) .drink-emoji{animation-delay:.6s;filter:drop-shadow(0 0 8px rgba(212,168,67,0.5));}
+  .drink-item:nth-child(3) .drink-emoji{animation-delay:1.2s;filter:drop-shadow(0 0 8px rgba(196,80,26,0.5));}
+  .drink-item:nth-child(4) .drink-emoji{animation-delay:1.8s;filter:drop-shadow(0 0 8px rgba(74,124,63,0.5));}
+  .drink-item:nth-child(5) .drink-emoji{animation-delay:2.4s;filter:drop-shadow(0 0 8px rgba(212,168,67,0.5));}
+  .drink-label{font-size:clamp(8px,2vw,10px);letter-spacing:2px;text-transform:uppercase;color:#3a4a30;font-weight:700;}
+  .drink-bubbles{display:flex;gap:3px;height:14px;align-items:flex-end;}
+  .bubble{width:4px;border-radius:50%;background:#4a7c3f;opacity:0;animation:bubbleRise 2s ease-in infinite;}
+  .drink-item:nth-child(2) .bubble{background:#d4a843;}
+  .drink-item:nth-child(3) .bubble{background:#c4501a;}
+  .bubble:nth-child(2){animation-delay:.4s;width:3px;}
+  .bubble:nth-child(3){animation-delay:.8s;width:5px;}
+  @keyframes drinkFloat{0%,100%{transform:translateY(0) rotate(-2deg);}50%{transform:translateY(-10px) rotate(2deg);}}
+  @keyframes bubbleRise{0%{opacity:0;height:4px;}40%{opacity:.7;}100%{opacity:0;height:12px;}}
 
   /* MICROFONO ANIMADO */
   .mic-wrap{display:flex;justify-content:center;align-items:center;gap:10px;margin-bottom:6px;}
@@ -181,117 +178,41 @@
     <div class="tagline">Sistema de peticiones</div>
 
     <div class="drinks-row">
-
-      <!-- TROPICAL: copa con pajita y sombrilla -->
       <div class="drink-item">
-        <svg class="drink-svg" viewBox="0 0 44 64" xmlns="http://www.w3.org/2000/svg">
-          <defs><clipPath id="cp1"><path d="M6 4 L38 4 L26 34 L18 34 Z"/></clipPath></defs>
-          <path d="M6 4 L38 4 L26 34 L18 34 Z" fill="#1a3a20" stroke="#4a9a50" stroke-width="1.5" stroke-linejoin="round"/>
-          <rect class="liq" x="0" y="18" width="44" height="18" fill="#2a8a45" opacity=".75" clip-path="url(#cp1)"/>
-          <circle class="bub" cx="15" cy="28" r="1.8" fill="#7aD490"/>
-          <circle class="bub bub2" cx="23" cy="23" r="1.3" fill="#7aD490"/>
-          <circle class="bub bub3" cx="19" cy="30" r="1.1" fill="#7aD490"/>
-          <rect x="20" y="34" width="4" height="16" fill="#1a3a20" stroke="#4a9a50" stroke-width="1.2"/>
-          <rect x="13" y="50" width="18" height="3.5" rx="1.8" fill="#4a9a50"/>
-          <!-- pajita naranja -->
-          <line x1="30" y1="6" x2="34" y2="34" stroke="#e8804a" stroke-width="2.2" stroke-linecap="round"/>
-          <!-- sombrillita -->
-          <path d="M28 7 Q32 2 36 7 Q32 9.5 28 7Z" fill="#d4a843"/>
-          <line x1="32" y1="7" x2="32" y2="12" stroke="#d4a843" stroke-width="1" stroke-linecap="round"/>
-          <!-- hojita -->
-          <path d="M10 10 Q6 6 10 4 Q12 8 10 10Z" fill="#4a9a50"/>
-        </svg>
+        <div class="drink-bubbles">
+          <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+        </div>
+        <div class="drink-emoji">🍹</div>
         <div class="drink-label">Tropical</div>
       </div>
-
-      <!-- BRINDIS: dos copas de champagne chocando -->
       <div class="drink-item">
-        <svg class="drink-svg" viewBox="0 0 52 64" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <clipPath id="cp2a"><path d="M4 6 Q14 4 18 6 L15 28 Q10 32 7 28 Z"/></clipPath>
-            <clipPath id="cp2b"><path d="M34 6 Q44 4 48 6 L45 28 Q42 32 37 28 Z"/></clipPath>
-          </defs>
-          <!-- copa izquierda -->
-          <path d="M4 6 Q14 4 18 6 L15 28 Q10 32 7 28 Z" fill="#2a2010" stroke="#d4a843" stroke-width="1.4" stroke-linejoin="round"/>
-          <rect class="liq" x="0" y="12" width="22" height="20" fill="#c8a830" opacity=".55" clip-path="url(#cp2a)"/>
-          <circle class="bub" cx="9" cy="24" r="1.3" fill="#f0d060"/>
-          <circle class="bub bub2" cx="13" cy="18" r="1" fill="#f0d060"/>
-          <line x1="11" y1="32" x2="9" y2="46" stroke="#d4a843" stroke-width="1.4" stroke-linecap="round"/>
-          <rect x="4" y="46" width="14" height="3" rx="1.5" fill="#d4a843"/>
-          <!-- copa derecha -->
-          <path d="M34 6 Q44 4 48 6 L45 28 Q42 32 37 28 Z" fill="#2a2010" stroke="#d4a843" stroke-width="1.4" stroke-linejoin="round"/>
-          <rect class="liq" x="30" y="12" width="22" height="20" fill="#c8a830" opacity=".55" clip-path="url(#cp2b)"/>
-          <circle class="bub" cx="43" cy="24" r="1.3" fill="#f0d060"/>
-          <circle class="bub bub3" cx="39" cy="18" r="1" fill="#f0d060"/>
-          <line x1="41" y1="32" x2="43" y2="46" stroke="#d4a843" stroke-width="1.4" stroke-linecap="round"/>
-          <rect x="34" y="46" width="14" height="3" rx="1.5" fill="#d4a843"/>
-          <!-- destellos choque -->
-          <line x1="26" y1="4" x2="26" y2="0" stroke="#f0d060" stroke-width="1.5" stroke-linecap="round"/>
-          <line x1="22" y1="6" x2="19" y2="3" stroke="#f0d060" stroke-width="1.2" stroke-linecap="round"/>
-          <line x1="30" y1="6" x2="33" y2="3" stroke="#f0d060" stroke-width="1.2" stroke-linecap="round"/>
-        </svg>
+        <div class="drink-bubbles">
+          <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+        </div>
+        <div class="drink-emoji">🥂</div>
         <div class="drink-label">Brindis</div>
       </div>
-
-      <!-- COCTEL: copa martini con aceituna -->
       <div class="drink-item">
-        <svg class="drink-svg" viewBox="0 0 44 64" xmlns="http://www.w3.org/2000/svg">
-          <defs><clipPath id="cp3"><path d="M4 4 L40 4 L22 30 Z"/></clipPath></defs>
-          <path d="M4 4 L40 4 L22 30 Z" fill="#180e28" stroke="#c060e0" stroke-width="1.5" stroke-linejoin="round"/>
-          <rect class="liq" x="0" y="14" width="44" height="18" fill="#8040c0" opacity=".65" clip-path="url(#cp3)"/>
-          <circle class="bub" cx="16" cy="22" r="1.2" fill="#d090ff"/>
-          <circle class="bub bub2" cx="26" cy="17" r="1" fill="#d090ff"/>
-          <line x1="22" y1="30" x2="22" y2="46" stroke="#c060e0" stroke-width="1.5" stroke-linecap="round"/>
-          <rect x="13" y="46" width="18" height="3.5" rx="1.8" fill="#c060e0"/>
-          <!-- palillo con aceituna -->
-          <line x1="14" y1="8" x2="30" y2="8" stroke="#d4a843" stroke-width="1.2" stroke-linecap="round"/>
-          <circle cx="22" cy="8" r="3.5" fill="#3a7a30" stroke="#2a5a20" stroke-width="1"/>
-          <circle cx="22" cy="8" r="1.5" fill="#c4501a"/>
-        </svg>
+        <div class="drink-bubbles">
+          <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+        </div>
+        <div class="drink-emoji">🍸</div>
         <div class="drink-label">Coctel</div>
       </div>
-
-      <!-- CERVEZA: tarro con espuma y asa -->
       <div class="drink-item">
-        <svg class="drink-svg" viewBox="0 0 48 64" xmlns="http://www.w3.org/2000/svg">
-          <defs><clipPath id="cp4"><rect x="6" y="14" width="28" height="44" rx="3"/></clipPath></defs>
-          <rect x="6" y="14" width="28" height="44" rx="3" fill="#1e1204" stroke="#c4801a" stroke-width="1.5"/>
-          <rect class="liq" x="6" y="22" width="28" height="38" fill="#c4801a" opacity=".85" clip-path="url(#cp4)"/>
-          <!-- espuma -->
-          <ellipse cx="20" cy="18" rx="14" ry="7" fill="#f0ead0"/>
-          <ellipse cx="13" cy="15" rx="6" ry="5" fill="#f8f4e8"/>
-          <ellipse cx="27" cy="15" rx="6" ry="5" fill="#f8f4e8"/>
-          <ellipse cx="20" cy="13" rx="5" ry="4" fill="#fff"/>
-          <!-- burbujas -->
-          <circle class="bub" cx="13" cy="42" r="1.5" fill="#e8a040"/>
-          <circle class="bub bub2" cx="22" cy="36" r="1.2" fill="#e8a040"/>
-          <circle class="bub bub3" cx="17" cy="48" r="1.3" fill="#e8a040"/>
-          <!-- asa -->
-          <path d="M34 22 Q44 22 44 32 Q44 44 34 44" fill="none" stroke="#c4801a" stroke-width="2.5" stroke-linecap="round"/>
-        </svg>
+        <div class="drink-bubbles">
+          <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+        </div>
+        <div class="drink-emoji">🍺</div>
         <div class="drink-label">Cerveza</div>
       </div>
-
-      <!-- WHISKY: vaso rocks con hielos -->
       <div class="drink-item">
-        <svg class="drink-svg" viewBox="0 0 44 64" xmlns="http://www.w3.org/2000/svg">
-          <defs><clipPath id="cp5"><path d="M5 12 L39 12 L35 56 L9 56 Z"/></clipPath></defs>
-          <path d="M5 12 L39 12 L35 56 L9 56 Z" fill="#160e04" stroke="#c4801a" stroke-width="1.5" stroke-linejoin="round"/>
-          <rect class="liq" x="0" y="32" width="44" height="26" fill="#b06010" opacity=".8" clip-path="url(#cp5)"/>
-          <!-- hielos -->
-          <rect x="10" y="34" width="9" height="9" rx="2" fill="#c8e8f8" opacity=".8" transform="rotate(-12,14,38)"/>
-          <rect x="23" y="37" width="8" height="8" rx="2" fill="#d8f0ff" opacity=".7" transform="rotate(8,27,41)"/>
-          <rect x="15" y="42" width="7" height="7" rx="2" fill="#c8e8f8" opacity=".65" transform="rotate(-5,18,45)"/>
-          <!-- burbujas -->
-          <circle class="bub" cx="14" cy="50" r="1.3" fill="#e8a040"/>
-          <circle class="bub bub2" cx="26" cy="46" r="1.1" fill="#e8a040"/>
-          <!-- lineas del vaso -->
-          <line x1="6" y1="20" x2="38" y2="20" stroke="#c4801a" stroke-width=".6" opacity=".3"/>
-          <line x1="7" y1="28" x2="37" y2="28" stroke="#c4801a" stroke-width=".6" opacity=".3"/>
-        </svg>
+        <div class="drink-bubbles">
+          <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+        </div>
+        <div class="drink-emoji">🥃</div>
         <div class="drink-label">Whisky</div>
       </div>
-
     </div>
 
     <div class="home-btns">
