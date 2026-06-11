@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ojos Verdes — Panel Presentadora</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/presentadora.css">
+</head>
+<body>
+
+<canvas class="bg-canvas" id="bgPres"></canvas>
+
+<!-- ═══════════════════════════════════════
+     CABEZA
+════════════════════════════════════════ -->
+<header class="pres-hdr z1">
+  <div class="hdr-left">
+    <div class="hdr-eye">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="hdrGlow">
+            <feGaussianBlur stdDeviation="2" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <g class="hdr-eye-circle">
+          <circle cx="50" cy="50" r="47" fill="none" stroke="#e8e0d0" stroke-width="2.2" opacity=".85"/>
+        </g>
+        <g class="hdr-eye-rays" filter="url(#hdrGlow)">
+          <line x1="50" y1="18" x2="50" y2="10" stroke="#e8e0d0" stroke-width="2.2" stroke-linecap="round"/>
+          <line x1="58" y1="19.5" x2="61" y2="12" stroke="#e8e0d0" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="65.5" y1="23" x2="70" y2="17" stroke="#e8e0d0" stroke-width="1.6" stroke-linecap="round"/>
+          <line x1="42" y1="19.5" x2="39" y2="12" stroke="#e8e0d0" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="34.5" y1="23" x2="30" y2="17" stroke="#e8e0d0" stroke-width="1.6" stroke-linecap="round"/>
+          <line x1="72" y1="29" x2="78" y2="24" stroke="#e8e0d0" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="28" y1="29" x2="22" y2="24" stroke="#e8e0d0" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="50" y1="82" x2="50" y2="90" stroke="#e8e0d0" stroke-width="2.2" stroke-linecap="round"/>
+          <line x1="58" y1="80.5" x2="61" y2="88" stroke="#e8e0d0" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="65.5" y1="77" x2="70" y2="83" stroke="#e8e0d0" stroke-width="1.6" stroke-linecap="round"/>
+          <line x1="42" y1="80.5" x2="39" y2="88" stroke="#e8e0d0" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="34.5" y1="77" x2="30" y2="83" stroke="#e8e0d0" stroke-width="1.6" stroke-linecap="round"/>
+          <line x1="72" y1="71" x2="78" y2="76" stroke="#e8e0d0" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="28" y1="71" x2="22" y2="76" stroke="#e8e0d0" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="14" y1="50" x2="7"  y2="50" stroke="#e8e0d0" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="86" y1="50" x2="93" y2="50" stroke="#e8e0d0" stroke-width="1.8" stroke-linecap="round"/>
+        </g>
+        <g class="hdr-eye-lid" filter="url(#hdrGlow)">
+          <path d="M14 50 Q22 34 50 32 Q78 34 86 50 Q78 66 50 68 Q22 66 14 50 Z"
+                fill="none" stroke="#e8e0d0" stroke-width="2.4" stroke-linejoin="round"/>
+          <circle cx="50" cy="50" r="11" fill="none" stroke="#e8e0d0" stroke-width="2.2"/>
+          <circle cx="50" cy="50" r="5"  fill="#e8e0d0" class="hdr-eye-pupil"/>
+          <circle cx="53" cy="47" r="2"  fill="#4a7c3f" opacity=".85"/>
+        </g>
+      </svg>
+    </div>
+    <div>
+      <div class="pres-title">OJOS VERDES</div>
+      <div class="pres-sub">Panel de presentadora</div>
+    </div>
+  </div>
+  <div class="hdr-right">
+    <span class="badge badge-gold"   id="badgeTotal">0 total</span>
+    <span class="badge badge-green"  id="badgeWait">0 en espera</span>
+    <span class="badge badge-orange" id="badgeDone">0 listos</span>
+    <button class="ctrl-btn danger" id="logoutBtn" style="margin-left:8px;">Salir</button>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════
+     CUERPO
+════════════════════════════════════════ -->
+<main class="z1">
+
+  <!-- Stats -->
+  <div class="stats-bar">
+    <div class="stat-card"><div class="stat-num" id="statEspera">0</div><div class="stat-lbl">En espera</div></div>
+    <div class="stat-card"><div class="stat-num" id="statCanciones">0</div><div class="stat-lbl">Canciones</div></div>
+    <div class="stat-card"><div class="stat-num" id="statMesas">0</div><div class="stat-lbl">Mesas activas</div></div>
+  </div>
+
+  <!-- Controles -->
+  <div class="controls">
+    <div class="search-wrap">
+      <input type="text" id="searchInput" placeholder="Buscar equipo, mesa, cancion...">
+    </div>
+    <button class="ctrl-btn"        id="histBtn">Historial</button>
+    <button class="ctrl-btn danger" id="resetBtn">Resetear noche</button>
+  </div>
+
+  <!-- Cola -->
+  <div class="q-container">
+    <div class="section-title" id="queueLabel">Cola de peticiones</div>
+    <div id="qList"></div>
+
+    <div class="hist-section" id="histSection" style="display:none;">
+      <div class="hist-title">Canciones pedidas esta noche (no se repiten)</div>
+      <div class="hist-list" id="histList"></div>
+    </div>
+  </div>
+
+</main>
+
+<!-- Modal editar -->
+<div class="modal-bg" id="modalBg">
+  <div class="modal">
+    <div class="modal-title">Editar peticion</div>
+    <div class="fld"><label>Nombre del equipo</label><input type="text" id="editTeam" maxlength="40"></div>
+    <div class="fld"><label>Artista principal</label><input type="text" id="editArtist" maxlength="40"></div>
+    <div id="editSongs"></div>
+    <div class="modal-btns">
+      <button class="mbtn cancel" id="modalCancel">Cancelar</button>
+      <button class="mbtn save"   id="modalSave">Guardar cambios</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- ═══════════════════════════════════════
+     PIE
+════════════════════════════════════════ -->
+<footer style="position:relative;z-index:1;text-align:center;padding:1rem;font-size:10px;color:#2e3e26;letter-spacing:2px;">
+  OJOS VERDES BAR &amp; KARAOKE
+</footer>
+
+<script type="module" src="js/presentadora.controller.js"></script>
+</body>
+</html>

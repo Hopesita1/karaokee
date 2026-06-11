@@ -1,0 +1,42 @@
+/* ── Login ── */
+.login-wrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  position: relative;
+}
+
+.login-card {
+  background: rgba(17,26,12,.95);
+  border: 1px solid var(--green);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 360px;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 40px rgba(74,124,63,.15);
+}
+
+.login-logo     { display:flex; justify-content:center; margin-bottom:1.25rem; }
+.login-logo svg { width:80px; height:80px; overflow:visible; }
+
+.login-title { font-family:var(--font-serif); font-size:20px; letter-spacing:4px; color:var(--gold); text-align:center; margin-bottom:4px; }
+.login-sub   { font-size:10px; letter-spacing:3px; color:var(--green); text-transform:uppercase; text-align:center; margin-bottom:2rem; }
+
+.login-fld       { margin-bottom:1.1rem; }
+.login-fld label { display:block; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--green); margin-bottom:6px; font-weight:700; }
+.login-fld input { width:100%; background:#0a1006; border:1px solid var(--border2); color:var(--text); padding:12px 14px; border-radius:10px; font-family:var(--font-sans); font-size:15px; outline:none; transition:border-color .15s; }
+.login-fld input:focus { border-color:var(--green); }
+.login-fld input::placeholder { color:var(--text-dim); }
+
+.login-btn { width:100%; background:var(--green); color:#d4edcc; border:none; padding:14px; border-radius:12px; font-family:var(--font-serif); font-size:16px; letter-spacing:3px; cursor:pointer; transition:all .18s; text-transform:uppercase; margin-top:.5rem; }
+.login-btn:hover    { background:#5a9c4e; }
+.login-btn:disabled { background:#1c2716; color:#3a4a30; cursor:not-allowed; }
+
+.login-error { background:#1a0808; border:1px solid var(--orange); color:#e8804a; border-radius:8px; padding:10px 14px; font-size:13px; text-align:center; margin-top:1rem; display:none; font-weight:600; animation:errShake .3s ease; }
+.login-error.show { display:block; }
+
+@keyframes errShake { 0%,100%{ transform:translateX(0); } 25%{ transform:translateX(-6px); } 75%{ transform:translateX(6px); } }
