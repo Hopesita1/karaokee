@@ -2,7 +2,7 @@
 export const firebaseConfig = {
   apiKey:            "AIzaSyAOnxwxc-x2HYP0P9BxENKNGGrpYqP5npU",
   authDomain:        "ojos-verdes-karaoke-ac092.firebaseapp.com",
-  databaseURL:       "https://ojos-verdes-karaoke-default-rtdb.firebaseio.com",
+  databaseURL:       "https://ojos-verdes-karaoke-ac092-default-rtdb.firebaseio.com",
   projectId:         "ojos-verdes-karaoke-ac092",
   storageBucket:     "ojos-verdes-karaoke-ac092.firebasestorage.app",
   messagingSenderId: "651771820657",
