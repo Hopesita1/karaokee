@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ojos Verdes — Acceso Presentadora</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+
+<canvas class="bg-canvas" id="bgLogin"></canvas>
+
+<!-- CABEZA (header mínimo) -->
+<header><!-- vacío en login --></header>
+
+<!-- CUERPO -->
+<main class="login-wrap z1">
+  <div class="login-card">
+
+    <div class="login-logo">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="2.5" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <g class="eye-circle">
+          <circle cx="50" cy="50" r="47" fill="none" stroke="#e8e0d0" stroke-width="2.2" opacity=".9"/>
+        </g>
+        <g class="eye-rays" filter="url(#glow)">
+          <line x1="50" y1="18" x2="50" y2="10" stroke="#e8e0d0" stroke-width="2.2" stroke-linecap="round"/>
+          <line x1="58" y1="19.5" x2="61" y2="12" stroke="#e8e0d0" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="65.5" y1="23" x2="70" y2="17" stroke="#e8e0d0" stroke-width="1.6" stroke-linecap="round"/>
+          <line x1="42" y1="19.5" x2="39" y2="12" stroke="#e8e0d0" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="34.5" y1="23" x2="30" y2="17" stroke="#e8e0d0" stroke-width="1.6" stroke-linecap="round"/>
+          <line x1="50" y1="82" x2="50" y2="90" stroke="#e8e0d0" stroke-width="2.2" stroke-linecap="round"/>
+          <line x1="42" y1="80.5" x2="39" y2="88" stroke="#e8e0d0" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="34.5" y1="77" x2="30" y2="83" stroke="#e8e0d0" stroke-width="1.6" stroke-linecap="round"/>
+          <line x1="14" y1="50" x2="7" y2="50" stroke="#e8e0d0" stroke-width="1.8" stroke-linecap="round"/>
+          <line x1="86" y1="50" x2="93" y2="50" stroke="#e8e0d0" stroke-width="1.8" stroke-linecap="round"/>
+        </g>
+        <g class="eye-lid" filter="url(#glow)">
+          <path d="M14 50 Q22 34 50 32 Q78 34 86 50 Q78 66 50 68 Q22 66 14 50 Z"
+                fill="none" stroke="#e8e0d0" stroke-width="2.4" stroke-linejoin="round"/>
+          <circle cx="50" cy="50" r="11" fill="none" stroke="#e8e0d0" stroke-width="2.2"/>
+          <circle cx="50" cy="50" r="5" fill="#e8e0d0" class="eye-pupil"/>
+          <circle cx="53" cy="47" r="2" fill="#4a7c3f" opacity=".8"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="login-title">OJOS VERDES</div>
+    <div class="login-sub">Acceso presentadora</div>
+
+    <div class="login-fld">
+      <label>Correo</label>
+      <input type="email" id="lEmail" placeholder="presentadora@ojosverdes.mx" autocomplete="email">
+    </div>
+    <div class="login-fld">
+      <label>Contrasena</label>
+      <input type="password" id="lPass" placeholder="••••••••" autocomplete="current-password">
+    </div>
+
+    <button class="login-btn" id="loginBtn">Entrar</button>
+    <div class="login-error" id="loginError"></div>
+
+  </div>
+</main>
+
+<!-- PIE -->
+<footer><!-- vacío en login --></footer>
+
+<script type="module" src="js/login.controller.js"></script>
+</body>
+</html>
