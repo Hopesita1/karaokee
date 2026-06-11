@@ -1,15 +1,15 @@
-// ── Configuración compartida de Firebase ──
+// ── Configuración Firebase — ojos-verdes-karaoke-ac092 ──
 export const firebaseConfig = {
-  apiKey: "AIzaSyC3Kr6BBTZEJ9PSd3Ncjxmc-LjA1P3Dq1w",
-  authDomain: "ojos-verdes-karaoke-ac092.firebaseapp.com",
-  databaseURL: "https://ojos-verdes-karaoke-default-rtdb.firebaseio.com",
-  projectId: "ojos-verdes-karaoke",
-  storageBucket: "ojos-verdes-karaoke-ac092.firebasestorage.app",
-  messagingSenderId: "255639804155",
-  appId: "1:255639804155:web:352e475df52aaab904f85e",
-  measurementId: "G-HEBTRNP832"
+  apiKey:            "AIzaSyAOnxwxc-x2HYP0P9BxENKNGGrpYqP5npU",
+  authDomain:        "ojos-verdes-karaoke-ac092.firebaseapp.com",
+  databaseURL:       "https://ojos-verdes-karaoke-default-rtdb.firebaseio.com",
+  projectId:         "ojos-verdes-karaoke-ac092",
+  storageBucket:     "ojos-verdes-karaoke-ac092.firebasestorage.app",
+  messagingSenderId: "651771820657",
+  appId:             "1:651771820657:web:f9e74798fe27986752b9d0",
+  measurementId:     "G-Z6CJW0Q6BC"
 };
 
-export const FB_VER = "12.13.0";
-export const COOL_MS = 10 * 60 * 1000; // 10 minutos cooldown
+export const FB_VER      = "12.14.0";
+export const COOL_MS     = 10 * 60 * 1000;
 export const TOTAL_MESAS = 10;
