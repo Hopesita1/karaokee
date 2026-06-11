@@ -42,19 +42,25 @@ async function doLogin(){
   btn.textContent = 'Verificando...';
 
   try {
-    await signInWithEmailAndPassword(auth, e, p);
-    // onAuthStateChanged redirige automáticamente
+    console.log('🔐 Intentando login con:', e);
+    console.log('🔧 authDomain:', firebaseConfig.authDomain);
+    console.log('🔧 projectId:', firebaseConfig.projectId);
+    const result = await signInWithEmailAndPassword(auth, e, p);
+    console.log('✅ Login exitoso:', result.user.email);
   } catch(err){
-    console.error('Login error:', err.code, err.message);
+    console.error('❌ Login error code:', err.code);
+    console.error('❌ Login error message:', err.message);
+    console.error('❌ Login error full:', JSON.stringify(err));
     btn.disabled    = false;
     btn.textContent = 'Entrar';
     const msgs = {
-      'auth/invalid-credential':  'Correo o contrasena incorrectos.',
-      'auth/invalid-email':       'El correo no es valido.',
-      'auth/user-not-found':      'No existe una cuenta con ese correo.',
-      'auth/wrong-password':      'Contrasena incorrecta.',
-      'auth/too-many-requests':   'Demasiados intentos. Espera un momento.',
-      'auth/network-request-failed': 'Sin conexion. Verifica tu red.'
+      'auth/invalid-credential':     'Correo o contrasena incorrectos.',
+      'auth/invalid-email':          'El correo no es valido.',
+      'auth/user-not-found':         'No existe una cuenta con ese correo.',
+      'auth/wrong-password':         'Contrasena incorrecta.',
+      'auth/too-many-requests':      'Demasiados intentos. Espera un momento.',
+      'auth/network-request-failed': 'Sin conexion. Verifica tu red.',
+      'auth/configuration-not-found':'Auth no configurado en este proyecto Firebase.'
     };
     showError(msgs[err.code] || `Error: ${err.code}`);
   }
