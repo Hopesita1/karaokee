@@ -33,55 +33,12 @@ async function getHist(){
 
 // ── VIEW: pantallas ──
 function show(id){
-  ['home','mesas','pedir'].forEach(x => {
+  ['home','pedir'].forEach(x => {
     const el = document.getElementById(x);
-    el.style.display = x === id ? (x === 'home' ? 'flex' : 'block') : 'none';
+    if(el) el.style.display = x === id ? (x === 'home' ? 'flex' : 'block') : 'none';
   });
 }
 window.show = show;
-
-// ── VIEW: QR ──
-function makeQR(n){
-  const baseUrl = window.location.href.split('?')[0];
-  const url = `${baseUrl}?mesa=${n}`;
-  const s=72, c=9, cell=Math.floor(s/c);
-  let rng = n * 7919;
-  function rand(){ rng=(rng*1664525+1013904223)&0xffffffff; return Math.abs(rng)/0x7fffffff; }
-  let out = '';
-  for(let r=0;r<c;r++) for(let cl=0;cl<c;cl++){
-    const finder=(r<3&&cl<3)||(r<3&&cl>=c-3)||(r>=c-3&&cl<3);
-    if(finder || rand()>.45)
-      out+=`<rect x="${cl*cell}" y="${r*cell}" width="${cell}" height="${cell}" fill="#0d1208"/>`;
-  }
-  return `<a href="${url}" style="display:block;text-decoration:none;">
-    <svg width="${s}" height="${s}" xmlns="http://www.w3.org/2000/svg" style="background:#f5f5f0;border-radius:4px;">
-      ${out}
-      <rect x="0" y="0" width="${cell*3}" height="${cell*3}" fill="none" stroke="#0d1208" stroke-width="2.5"/>
-      <rect x="${(c-3)*cell}" y="0" width="${cell*3}" height="${cell*3}" fill="none" stroke="#0d1208" stroke-width="2.5"/>
-      <rect x="0" y="${(c-3)*cell}" width="${cell*3}" height="${cell*3}" fill="none" stroke="#0d1208" stroke-width="2.5"/>
-    </svg></a>`;
-}
-
-// ── VIEW: grid de mesas ──
-function renderMesas(){
-  const g = document.getElementById('mesasGrid');
-  g.innerHTML = '';
-  const baseUrl = window.location.href.split('?')[0];
-  for(let i = 1; i <= TOTAL_MESAS; i++){
-    const d = document.createElement('div');
-    d.className = 'mesa-card';
-    d.addEventListener('click', () => openMesa(i));
-    d.innerHTML = `
-      <div class="m-num">${i}</div>
-      <div class="m-lbl">Mesa</div>
-      <div class="qr-box">${makeQR(i)}</div>
-      <div style="font-size:9px;color:#3a5030;margin-top:4px;letter-spacing:1px;word-break:break-all;">
-        ${baseUrl.replace(/.*\//,'')}?mesa=${i}
-      </div>`;
-    g.appendChild(d);
-  }
-}
-window.renderMesas = renderMesas;
 
 // ── CONTROLLER: abrir mesa ──
 function openMesa(n){

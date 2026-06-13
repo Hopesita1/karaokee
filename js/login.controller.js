@@ -32,6 +32,12 @@ function clearError(){
   errEl.classList.remove('show');
 }
 
+const debugBox = document.getElementById('debugBox');
+function showDebug(lines){
+  debugBox.style.display = 'block';
+  debugBox.innerHTML = lines.map(l => `<div>${l}</div>`).join('');
+}
+
 async function doLogin(){
   clearError();
   const e = email.value.trim();
@@ -45,12 +51,13 @@ async function doLogin(){
     console.log('🔐 Intentando login con:', e);
     console.log('🔧 authDomain:', firebaseConfig.authDomain);
     console.log('🔧 projectId:', firebaseConfig.projectId);
+    showDebug([`Intentando: ${e}`, `authDomain: ${firebaseConfig.authDomain}`, `projectId: ${firebaseConfig.projectId}`]);
     const result = await signInWithEmailAndPassword(auth, e, p);
     console.log('✅ Login exitoso:', result.user.email);
   } catch(err){
     console.error('❌ Login error code:', err.code);
     console.error('❌ Login error message:', err.message);
-    console.error('❌ Login error full:', JSON.stringify(err));
+    showDebug([`code: ${err.code}`, `msg: ${err.message}`]);
     btn.disabled    = false;
     btn.textContent = 'Entrar';
     const msgs = {
