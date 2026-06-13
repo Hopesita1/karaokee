@@ -147,15 +147,21 @@ async function submitReq(){
   if(!team)         { alert('Por favor escribe el nombre de tu equipo.'); return; }
   if(!valid.length) { alert('Agrega al menos una cancion.'); return; }
 
-  // Validar duplicados: mismo título Y mismo artista
-  const hist = await getHist();
+  // Validar duplicados: solo bloquear si la canción está en la cola activa (waiting/playing)
+  const snap = await get(ref(db,'queue'));
+  const activeQueue = snap.exists()
+    ? Object.values(snap.val()).filter(q => q.status === 'waiting' || q.status === 'playing')
+    : [];
+
   const dups = valid.filter(s =>
-    hist.some(h => {
-      const sameTitle  = h.title.trim().toLowerCase() === s.title.toLowerCase();
-      const bothArtist = h.artist.trim() !== '' && s.artist !== '';
-      const sameArtist = h.artist.trim().toLowerCase() === s.artist.toLowerCase();
-      return sameTitle && (!bothArtist || sameArtist);
-    })
+    activeQueue.some(q =>
+      (q.songs||[]).some(h => {
+        const sameTitle  = h.title.trim().toLowerCase() === s.title.toLowerCase();
+        const bothArtist = h.artist.trim() !== '' && s.artist !== '';
+        const sameArtist = h.artist.trim().toLowerCase() === s.artist.toLowerCase();
+        return sameTitle && (!bothArtist || sameArtist);
+      })
+    )
   );
   if(dups.length){ showDupOverlay(dups); return; }
 
